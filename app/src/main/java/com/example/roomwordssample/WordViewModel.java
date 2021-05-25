@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.room.Delete;
 
 import java.util.List;
 
@@ -15,9 +16,10 @@ public class WordViewModel extends AndroidViewModel {
 
     /**
      * constructor
+     *
      * @param application
      */
-    public WordViewModel(@NonNull Application application) {
+    public WordViewModel(Application application) {
         super(application);
         mRepository = new WordRepository(application);
         mAllWords = mRepository.getAllWords();
@@ -25,6 +27,7 @@ public class WordViewModel extends AndroidViewModel {
 
     /**
      * Método LiveData par aobtener las palabras
+     *
      * @return
      */
     LiveData<List<Word>> getAllWords() {
@@ -33,10 +36,23 @@ public class WordViewModel extends AndroidViewModel {
 
     /**
      * Método insert
+     *
      * @param word
      */
     public void insert(Word word) {
         mRepository.insert(word);
     }//fin del insert
-    
+
+    public void deleteWord(Word word) {
+        mRepository.deleteWord(word);
+    }
+
+    public void deleteAll() {
+        mRepository.deleteAll();
+    }
+
+    public void update(Word word) {
+        mRepository.update(word);
+    }
+
 }//fin de la clase WordViewModel
